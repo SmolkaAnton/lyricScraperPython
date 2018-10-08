@@ -6,6 +6,7 @@ def the_artist():
     new_artist = artist.replace("&", "and")
     new_artist = new_artist.replace("$", "-")
     new_artist =  "".join(c for c in new_artist if c not in "~`!@#%^*()_+={}[]'|\:;?/.,<>`")
+    new_artist = new_artist.strip()
     new_artist = new_artist.replace(" ", "-")
     return new_artist
 
@@ -14,6 +15,7 @@ def the_song():
     new_song = song.replace("&", "and")
     new_song = new_song.replace("$", "-")
     new_song =  "".join(c for c in new_song if c not in "~`!@#%^*()_+={}[]'|\:;?/.,<>`")
+    new_song = new_song.strip()
     new_song = new_song.replace(" ", "-")
     return new_song
 
