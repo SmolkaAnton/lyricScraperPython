@@ -2,43 +2,19 @@ from bs4 import BeautifulSoup
 import requests
 
 def the_artist():
-    list = []
     artist = input("Enter an artists name: ")
-    for i in artist:
-        list.append(i)
-
-    #Will fix glitch with Songs/Artists beginning with &
-    if(list[0]=="&"):
-        list.pop(0)
-
-    #Will replace characters with necessary replacements
-    for i in list:
-        if(i=="+"):
-            list.remove(i)
-    list = [w.replace('&', 'and') for w in list]
-    list = [w.replace('$', '-') for w in list]
-    list = [w.replace('.', '-') for w in list]
-    list = [w.replace('&', 'and') for w in list]
-
-    #In the case of there being back to back spaces, remove one
-    for i in range(len(list)-1):
-        if(list[i] == " " and list[i+1] == " "):
-            list.pop(i)
-
-    #Combine list into string
-    new_artist = ''.join(list)
-    #Remove other necessary characters
-    new_artist =  "".join(c for c in new_artist if c not in "!@#*(){}[]'|\:;?/,<>`")
-    #Remove spaces at the beginning and end
-    new_artist = new_artist.strip()
-    #Turn remaining spaces into dashes
-    new_artist = new_artist.replace(" ", "-")
+    new_artist = clean_up_string(artist)
     return new_artist
 
 def the_song():
+    song = input("Enter the artist's song: ")
+    new_song = clean_up_string(song)
+    return new_song
+
+def clean_up_string(str):
     list = []
-    artist = input("Enter a song: ")
-    for i in artist:
+    #Put the string into a list
+    for i in str:
         list.append(i)
 
     #Will fix glitch with Songs/Artists beginning with &
@@ -49,11 +25,11 @@ def the_song():
     for i in list:
         if(i=="+"):
             list.remove(i)
-            
     list = [w.replace('&', 'and') for w in list]
     list = [w.replace('$', '-') for w in list]
     list = [w.replace('.', '-') for w in list]
     list = [w.replace('&', 'and') for w in list]
+
 
     #In the case of there being back to back spaces, remove one
     for i in range(len(list)-1):
@@ -61,14 +37,14 @@ def the_song():
             list.pop(i)
 
     #Combine list into string
-    new_song = ''.join(list)
+    new_string = ''.join(list)
     #Remove other necessary characters
-    new_song =  "".join(c for c in new_song if c not in "!@#*(){}[]'|\:;?/,<>`")
+    new_string =  "".join(c for c in new_string if c not in "!@#*(){}[]'|\:;?/,<>`")
     #Remove spaces at the beginning and end
-    new_song = new_song.strip()
+    new_string = new_string.strip()
     #Turn remaining spaces into dashes
-    new_song = new_song.replace(" ", "-")
-    return new_song
+    new_string = new_string.replace(" ", "-")
+    return new_string
 
 def main():
     artist = the_artist()
