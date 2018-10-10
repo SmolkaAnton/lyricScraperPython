@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
+import csv
 
 def the_artist():
     artist = input("Enter an artists name: ")
@@ -52,7 +53,7 @@ def main():
     song = the_song()
     song = song.lower()
     url = "https://genius.com/" + artist + "-" + song + "-lyrics"
-    #print(url)
+    
     try:
         page = requests.get(url)
         #Extract the page's HTML as a string
@@ -60,6 +61,11 @@ def main():
         #Scrape the song lyrics from the HTML
         lyrics = html.find("div", class_="lyrics").get_text()
         print(lyrics)
+
+        #Export Artist, Song Title, and Lyrics to a .csv file
+        with open('lyrics.csv', 'a') as csv_file:
+            writer = csv.writer(csv_file)
+            writer.writerow([artist, song, lyrics])
     except:
         print("Error! Invalid Artist or song!")
 
