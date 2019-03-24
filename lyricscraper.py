@@ -31,12 +31,6 @@ def clean_up_string(str):
     list = [w.replace('.', '-') for w in list]
     list = [w.replace('&', 'and') for w in list]
 
-
-    #In the case of there being back to back spaces, remove one
-    for i in range(len(list)-1):
-        if(list[i] == " " and list[i+1] == " "):
-            list.pop(i)
-
     #Combine list into string
     new_string = ''.join(list)
     #Remove other necessary characters
@@ -53,7 +47,7 @@ def main():
     song = the_song()
     song = song.lower()
     url = "https://genius.com/" + artist + "-" + song + "-lyrics"
-    
+
     try:
         page = requests.get(url)
         #Extract the page's HTML as a string
